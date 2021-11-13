@@ -1,0 +1,116 @@
+a,b,p=(input("a b p:")).split()
+c,d,q=(input("c d q:")).split()
+a=float(a)
+b=float(b)
+c=float(c)
+d=float(d)
+p=float(p)
+q=float(q)
+#ax+by=p
+#cx+dy=q
+  
+def Graph2():
+  #Строим график
+  fig,ax = plt.subplots()
+  x = numpy.linspace(-10, 10, 50)
+  y1=(p-b*x)/a
+  y2=(q-d*x)/c 
+  ax.plot(x,y1)
+  ax.plot(x,y2)
+  plt.show()
+
+def Graph():
+  #Строим график
+  fig,ax = plt.subplots()
+  x = numpy.linspace(-10, 10, 50)
+  y1 = (p-a*x)/b
+  y2 = (q-c*x)/d
+  ax.plot(x,y1)
+  ax.plot(x,y2)
+  plt.show()
+
+import matplotlib.pyplot as plt
+import numpy # импортируем библиотеку 
+M1 = numpy.array([[a, b], [c, d]]) # Матрица (левая часть системы)
+v1 = numpy.array([p, q]) # Вектор (правая часть системы)
+if (a==0 and b==0 and p!=0)or(c==0 and d==0 and q!=0):
+  print("Решений нет")
+elif (a==0 and c==0) and (b!=0 and d!=0):
+  if ((((q!=0)and(b/d==p/q))or((q!=0)and(b/d==p/q)and(p==0))or((p!=0)and(d/b==q/p)and(q==0)))or((b-d==p-q)or((b-d==p-q)and(p==0 or q==0)))):
+    print("Бесконечное множество решений")
+  else:
+    print("Нет решений")
+  Graph()
+elif (b==0 and d==0) and (a!=0 and c!=0):
+  if ((((q!=0)and(a/c==p/q))or((q!=0)and(a/c==p/q)and(p==0))or((p!=0)and(c/a==q/p)and(q==0)))or((a-c==p-q)or((a-c==p-q)and(p==0 or q==0)))):
+    print("Бесконечное множество решений")
+  else:
+    print("Нет решений")
+  Graph2()
+elif ((a==0 and c==0) and ((b==0 and d!=0)and(p!=0))) or ((a==0 and c==0) and ((b!=0 and d==0)and(q!=0))):
+  print("Решений нет, функции не существует!")
+elif ((b==0 and d==0) and ((a==0 and c!=0)and(p!=0))) or ((b==0 and d==0) and ((a!=0 and c==0)and(q!=0))):
+  print("Решений нет, функции не существует!")
+elif (a==0 and b==0 and c==0 and d==0):
+  print("Бесконечно много решений, функций не существует!") 
+elif (((c!=0 and d!=0)and(a/c==b/d))and((q!=0 and d!=0)and(b/d==p/q)))or((a-c==b-d)and(b-d==p-q)and(p!=0 and q!=0)):
+  if (a!=0 and b!=0 and c!=0 and d!=0):
+    print("Бесконечно много решений")  
+    Graph()
+  else:
+    print("Бесконечно много решений, функций не существует!")  
+elif ((a!=0 and b!=0 and c!=0 and d!=0) and ((p==0 or q==0)))and(a/c==b/d):
+  if p==0 and q==0:
+    print("Бесконечно много решений")
+  else:
+    print("Решений нет")
+  Graph()
+else:
+  solv = numpy.linalg.solve(M1, v1)
+  print(solv)
+  if b==0 and c!=0:
+      fig,ax = plt.subplots()
+      x = numpy.linspace(-10, 10, 50)
+      y1 = (p-b*x)/a
+      y2 = (q-c*x)/d
+      ax.plot(x,y1)
+      ax.plot(x,y2)
+      plt.scatter(solv[0], solv[1], s=90, c='#660099', marker='$♥$')
+      plt.show()
+  elif b==0 and c==0:
+      fig,ax = plt.subplots()
+      x = numpy.linspace(-10, 10, 50)
+      y1 = (p-b*x)/a
+      y2 = (q-c*x)/d
+      ax.plot(y1,x)
+      ax.plot(x,y2)
+      plt.scatter(solv[0], solv[1], s=90, c='#660099', marker='$♥$')
+      plt.show()
+  elif d==0 and a!=0:
+      fig,ax = plt.subplots()
+      x = numpy.linspace(-10, 10, 50)
+      y1 = (p-a*x)/b
+      y2 = (q-d*x)/c
+      ax.plot(x,y1)
+      ax.plot(x,y2)
+      plt.scatter(solv[0], solv[1], s=90, c='#660099', marker='$♥$')
+      plt.show()
+  elif d==0 and a==0:
+      fig,ax = plt.subplots()
+      x = numpy.linspace(-10, 10, 50)
+      y1 = (p-a*x)/b
+      y2 = (q-d*x)/c
+      ax.plot(x,y1)
+      ax.plot(y2,x)
+      plt.scatter(solv[0], solv[1], s=90, c='#660099', marker='$♥$')
+      plt.show()
+  else:
+    fig,ax = plt.subplots()
+    x = numpy.linspace(-10, 10, 50)
+    y1 = (p-a*x)/b
+    y2 = (q-c*x)/d
+    ax.plot(x,y1)
+    ax.plot(x,y2)
+    plt.scatter(solv[0], solv[1], s=90, c='#660099', marker='$♥$')
+    plt.show()
+ 
